@@ -28,6 +28,10 @@
         <ShellContent ContentTemplate="{DataTemplate local:TenantsPage}" />
     </FlyoutItem>
 
+    <FlyoutItem Title="Documents" Icon="folder_icon.png">
+        <ShellContent ContentTemplate="{DataTemplate local:DocumentsPage}" />
+    </FlyoutItem>
+
     <MenuItem Text="Financials" />
     <MenuItem Text="Messages" />
     <MenuItem Text="Documents" />
