@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:LandlordManager.Models"
+             x:Class="LandlordManager.ChatPage"
+             BackgroundColor="#f4f6f8">
+
+    <Grid RowDefinitions="*, Auto" Padding="10">
+        <CollectionView x:Name="cvMessages" Grid.Row="0" Margin="0,0,0,10">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Message">
+                    <HorizontalStackLayout HorizontalOptions="{Binding Alignment}" Spacing="10" Margin="0,5">
+                        <Frame BackgroundColor="{Binding BubbleColor}" Padding="10" CornerRadius="15" HasShadow="False">
+                            <Label Text="{Binding Text}" TextColor="{Binding TextColor}" FontSize="16"/>
+                        </Frame>
+                        <Label Text="{Binding Timestamp, StringFormat='{0:HH:mm}'}" VerticalOptions="Center" FontSize="10" TextColor="Gray"/>
+                    </HorizontalStackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Grid Grid.Row="1" ColumnDefinitions="*, Auto" ColumnSpacing="10">
+            <Entry x:Name="txtMessage" Placeholder="Type a message..." BackgroundColor="White" TextColor="Black" HeightRequest="50"/>
+            <Button Grid.Column="1" Text="Send" BackgroundColor="#059669" TextColor="White" Clicked="OnSendClicked"/>
+        </Grid>
+    </Grid>
+</ContentPage>

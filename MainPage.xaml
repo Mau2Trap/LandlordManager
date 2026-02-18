@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LandlordManager.MainPage"
+             Title="Dashboard"
+             BackgroundColor="#f4f6f8">
+    <ScrollView>
+        <Grid RowDefinitions="Auto, Auto, Auto" Padding="20" RowSpacing="20">
+
+            <Grid Grid.Row="0" ColumnDefinitions="*, *" RowDefinitions="100, 100" ColumnSpacing="15" RowSpacing="15">
+
+                <Frame Grid.Row="0" Grid.Column="0" CornerRadius="10" Padding="15" BackgroundColor="White" HasShadow="True">
+                    <StackLayout VerticalOptions="Center">
+                        <Label Text="Properties" TextColor="Gray" FontSize="12"/>
+                        <Label x:Name="lblPropCount" Text="0" TextColor="#0f172a" FontSize="28" FontAttributes="Bold"/>
+                    </StackLayout>
+                </Frame>
+
+                <Frame Grid.Row="0" Grid.Column="1" CornerRadius="10" Padding="15" BackgroundColor="White" HasShadow="True">
+                    <StackLayout VerticalOptions="Center">
+                        <Label Text="Active Tenants" TextColor="Gray" FontSize="12"/>
+                        <Label x:Name="lblTenantCount" Text="0" TextColor="#0f172a" FontSize="28" FontAttributes="Bold"/>
+                    </StackLayout>
+                </Frame>
+
+                <Frame Grid.Row="1" Grid.Column="0" CornerRadius="10" Padding="15" BackgroundColor="White" HasShadow="True">
+                    <StackLayout VerticalOptions="Center">
+                        <Label Text="Net Income" TextColor="Gray" FontSize="12"/>
+                        <Label x:Name="lblIncome" Text="$0" TextColor="#059669" FontSize="22" FontAttributes="Bold"/>
+                    </StackLayout>
+                </Frame>
+
+                <Frame Grid.Row="1" Grid.Column="1" CornerRadius="10" Padding="15" BackgroundColor="White" HasShadow="True">
+                    <StackLayout VerticalOptions="Center">
+                        <Label Text="Open Repairs" TextColor="Gray" FontSize="12"/>
+                        <Label Text="0" TextColor="#e11d48" FontSize="28" FontAttributes="Bold"/>
+                    </StackLayout>
+                </Frame>
+            </Grid>
+
+            <VerticalStackLayout Grid.Row="1" Spacing="10">
+                <Label Text="Upcoming Events" FontSize="18" FontAttributes="Bold" TextColor="#0f172a"/>
+
+                <Frame BackgroundColor="White" CornerRadius="8" Padding="15" HasShadow="False" BorderColor="#e2e8f0">
+                    <Grid ColumnDefinitions="40, *, Auto">
+                        <BoxView Color="#e0f2fe" CornerRadius="20" HeightRequest="40" WidthRequest="40"/>
+                        <Label Grid.Column="1" Text="Monthly Rent Collection" VerticalOptions="Center" Margin="10,0" FontAttributes="Bold"/>
+                        <Label Grid.Column="2" Text="Feb 28" TextColor="#2563eb" VerticalOptions="Center"/>
+                    </Grid>
+                </Frame>
+
+                <Frame BackgroundColor="White" CornerRadius="8" Padding="15" HasShadow="False" BorderColor="#e2e8f0">
+                    <Grid ColumnDefinitions="40, *, Auto">
+                        <BoxView Color="#fef3c7" CornerRadius="20" HeightRequest="40" WidthRequest="40"/>
+                        <Label Grid.Column="1" Text="Property Tax Payment" VerticalOptions="Center" Margin="10,0" FontAttributes="Bold"/>
+                        <Label Grid.Column="2" Text="Mar 14" TextColor="#d97706" VerticalOptions="Center"/>
+                    </Grid>
+                </Frame>
+            </VerticalStackLayout>
+
+            <Grid Grid.Row="2" ColumnDefinitions="*, *" ColumnSpacing="15">
+                <Button Text="+ Add Property" BackgroundColor="#eff6ff" TextColor="#2563eb" FontAttributes="Bold"/>
+                <Button Text="+ Add Expense" BackgroundColor="#ecfdf5" TextColor="#059669" FontAttributes="Bold"/>
+            </Grid>
+
+        </Grid>
+    </ScrollView>
+</ContentPage>

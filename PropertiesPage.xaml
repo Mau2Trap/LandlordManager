@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:LandlordManager.Models"
+             x:Class="LandlordManager.PropertiesPage"
+             Title="My Properties"
+             BackgroundColor="#f4f6f8">
+
+    <Grid RowDefinitions="*, Auto" Padding="15">
+        <CollectionView x:Name="cvProperties" Grid.Row="0">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Property">
+                    <Frame Margin="0,5" Padding="15" CornerRadius="12" BackgroundColor="White" HasShadow="True">
+                        <StackLayout>
+                            <Label Text="{Binding Address}" FontSize="18" FontAttributes="Bold" TextColor="#2c3e50"/>
+                            <Label Text="{Binding City}" FontSize="14" TextColor="Gray"/>
+                            <Label Text="{Binding MonthlyRent, StringFormat='Rent: ${0:F0}/mo'}" TextColor="#27ae60" FontAttributes="Bold" Margin="0,5,0,0"/>
+                        </StackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Button Grid.Row="1" Text="+ Add Property" 
+                BackgroundColor="#2980b9" TextColor="White" 
+                HeightRequest="50" CornerRadius="25" 
+                Clicked="OnAddPropertyClicked" Margin="0,10"/>
+    </Grid>
+</ContentPage>

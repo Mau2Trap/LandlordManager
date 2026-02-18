@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="LandlordManager.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:LandlordManager"
+    Shell.FlyoutBehavior="Flyout"
+    FlyoutBackgroundColor="#0f172a">
+    <Shell.FlyoutHeader>
+        <Grid HeightRequest="100" BackgroundColor="#0f172a" Padding="20">
+            <Label Text="RENTALYST" 
+                   TextColor="White" 
+                   FontSize="24" 
+                   FontAttributes="Bold" 
+                   VerticalOptions="Center"/>
+        </Grid>
+    </Shell.FlyoutHeader>
+
+    <FlyoutItem Title="Dashboard" Icon="dashboard_icon.png">
+        <ShellContent ContentTemplate="{DataTemplate local:MainPage}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Properties" Icon="house_icon.png">
+        <ShellContent ContentTemplate="{DataTemplate local:PropertiesPage}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Tenants" Icon="people_icon.png">
+        <ShellContent ContentTemplate="{DataTemplate local:TenantsPage}" />
+    </FlyoutItem>
+
+    <MenuItem Text="Financials" />
+    <MenuItem Text="Messages" />
+    <MenuItem Text="Documents" />
+    <MenuItem Text="Repairs" />
+
+</Shell>
