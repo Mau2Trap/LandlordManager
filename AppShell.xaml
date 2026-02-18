@@ -32,6 +32,10 @@
         <ShellContent ContentTemplate="{DataTemplate local:DocumentsPage}" />
     </FlyoutItem>
 
+    <FlyoutItem Title="Repairs" Icon="hammer_icon.png">
+        <ShellContent ContentTemplate="{DataTemplate local:RepairsPage}" />
+    </FlyoutItem>
+
     <MenuItem Text="Financials" />
     <MenuItem Text="Messages" />
     <MenuItem Text="Documents" />

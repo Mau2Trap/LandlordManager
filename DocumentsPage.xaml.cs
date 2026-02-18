@@ -16,30 +16,58 @@ public partial class DocumentsPage : ContentPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        cvDocuments.ItemsSource = await _dbService.GetDocumentsAsync();
+        await LoadDocuments();
+    }
+
+    async Task LoadDocuments()
+    {
+        var docs = await _dbService.GetDocumentsAsync();
+        cvDocuments.ItemsSource = docs;
+        lblEmpty.IsVisible = docs.Count == 0;
     }
 
     private async void OnUploadClicked(object sender, EventArgs e)
     {
-        // 1. Pick a file
-        var result = await FilePicker.Default.PickAsync();
-        if (result != null)
+        try
         {
-            // 2. Ask for a name
-            string title = await DisplayPromptAsync("Save Document", "Enter a name for this file:");
-            if (string.IsNullOrWhiteSpace(title)) title = result.FileName;
-
-            // 3. Save reference to Database
-            var doc = new Document
+            // 1. Open the Phone's File Picker (PDFs and Images)
+            var result = await FilePicker.Default.PickAsync(new PickOptions
             {
-                Title = title,
-                FilePath = result.FullPath,
-                FileType = result.FileName.EndsWith(".pdf") ? "PDF" : "Image",
-                UploadDate = DateTime.Now
-            };
+                PickerTitle = "Select a Lease or Receipt",
+                FileTypes = FilePickerFileType.Images // You can change this to .Pdf later if needed
+            });
 
-            await _dbService.SaveDocumentAsync(doc);
-            OnAppearing(); // Refresh list
+            if (result != null)
+            {
+                // 2. Ask user to name it
+                string title = await DisplayPromptAsync("Save Document", "Enter a name (e.g., 'Unit 101 Lease'):");
+                if (string.IsNullOrWhiteSpace(title)) title = result.FileName;
+
+                // 3. Save to Database
+                var doc = new Document
+                {
+                    Title = title,
+                    FilePath = result.FullPath,
+                    FileType = result.FileName.EndsWith(".pdf") ? "PDF" : "Image",
+                    UploadDate = DateTime.Now
+                };
+
+                await _dbService.SaveDocumentAsync(doc);
+                await LoadDocuments();
+            }
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Error", "Could not upload file: " + ex.Message, "OK");
+        }
+    }
+
+    private async void OnDocumentTapped(object sender, TappedEventArgs e)
+    {
+        // Feature for later: Open the file to view it
+        if (e.Parameter is Document doc)
+        {
+            await DisplayAlert("File Selected", $"You tapped: {doc.Title}", "OK");
         }
     }
 }

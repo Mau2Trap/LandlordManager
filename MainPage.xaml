@@ -4,6 +4,7 @@
              x:Class="LandlordManager.MainPage"
              Title="Dashboard"
              BackgroundColor="#f4f6f8">
+
     <ScrollView>
         <Grid RowDefinitions="Auto, Auto, Auto" Padding="20" RowSpacing="20">
 
@@ -59,21 +60,17 @@
             </VerticalStackLayout>
 
             <Grid Grid.Row="2" ColumnDefinitions="*, *" ColumnSpacing="15">
-                <Button Text="+ Add Property" BackgroundColor="#eff6ff" TextColor="#2563eb" FontAttributes="Bold"/>
-                <Button Text="+ Add Expense" BackgroundColor="#ecfdf5" TextColor="#059669" FontAttributes="Bold"/>
-            </Grid>
-
-            <Grid Grid.Row="2" ColumnDefinitions="*, *" ColumnSpacing="15">
                 <Button Text="+ Add Property" 
-            BackgroundColor="#eff6ff" 
-            TextColor="#2563eb" 
-            FontAttributes="Bold"
-            Clicked="OnAddPropertyClicked"/>
+                        BackgroundColor="#eff6ff" 
+                        TextColor="#2563eb" 
+                        FontAttributes="Bold"
+                        Clicked="OnAddPropertyClicked"/>
+
                 <Button Text="+ Add Expense" 
-            BackgroundColor="#ecfdf5" 
-            TextColor="#059669" 
-            FontAttributes="Bold"
-            Clicked="OnAddExpenseClicked"/>
+                        BackgroundColor="#ecfdf5" 
+                        TextColor="#059669" 
+                        FontAttributes="Bold"
+                        Clicked="OnAddExpenseClicked"/>
             </Grid>
 
         </Grid>

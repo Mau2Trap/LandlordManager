@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:LandlordManager.Models"
+             x:Class="LandlordManager.RepairsPage"
+             Title="Maintenance"
+             BackgroundColor="#f4f6f8">
+
+    <Grid RowDefinitions="*, Auto" Padding="15">
+        <CollectionView x:Name="cvRepairs" SelectionMode="Single" SelectionChanged="OnRepairSelected">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:RepairRequest">
+                    <Frame Margin="0,5" Padding="15" CornerRadius="12" BackgroundColor="White" HasShadow="True">
+                        <Grid ColumnDefinitions="*, Auto">
+                            <StackLayout Grid.Column="0" Spacing="5">
+                                <Label Text="{Binding Title}" FontSize="16" FontAttributes="Bold" TextColor="#0f172a"/>
+                                <Label Text="{Binding Description}" FontSize="12" TextColor="Gray" LineBreakMode="TailTruncation"/>
+                                <Label Text="{Binding ReportedDate, StringFormat='Reported: {0:MMM dd}'}" FontSize="10" TextColor="Silver"/>
+                            </StackLayout>
+
+                            <Frame Grid.Column="1" BackgroundColor="{Binding StatusColor}" Padding="10,5" CornerRadius="8" HasShadow="False" VerticalOptions="Center">
+                                <Label Text="{Binding Priority}" TextColor="White" FontSize="12" FontAttributes="Bold"/>
+                            </Frame>
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Button Grid.Row="1" Text="+ New Request" BackgroundColor="#e11d48" TextColor="White" HeightRequest="50" CornerRadius="25" Clicked="OnAddRepairClicked" Margin="0,10"/>
+    </Grid>
+</ContentPage>
