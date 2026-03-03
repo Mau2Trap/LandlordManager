@@ -1,4 +1,6 @@
+using SQLite;
 using LandlordManager.Models;
+using LandlordManager.Services; // <--- THIS WAS MISSING
 
 namespace LandlordManager;
 
@@ -34,7 +36,7 @@ public partial class RepairsPage : ContentPage
         var repair = new RepairRequest
         {
             Title = title,
-            Description = "Reported by Landlord", // In a full app, this would come from the tenant
+            Description = "Reported by Landlord",
             Priority = priority,
             Status = "Open",
             ReportedDate = DateTime.Now

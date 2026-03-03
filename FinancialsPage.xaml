@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LandlordManager.FinancialsPage"
+             Title="Financial Reports"
+             BackgroundColor="#f4f6f8">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="20" Padding="20">
+
+            <Grid ColumnDefinitions="*, *" RowDefinitions="Auto, Auto" ColumnSpacing="15" RowSpacing="15">
+
+                <Frame Grid.Row="0" Grid.Column="0" BackgroundColor="#ecfdf5" BorderColor="#a7f3d0" CornerRadius="12" Padding="15" HasShadow="False">
+                    <StackLayout>
+                        <Label Text="Total Income" FontSize="12" TextColor="#059669" FontAttributes="Bold"/>
+                        <Label x:Name="lblIncome" Text="$0.00" FontSize="22" FontAttributes="Bold" TextColor="#047857" Margin="0,5,0,0"/>
+                    </StackLayout>
+                </Frame>
+
+                <Frame Grid.Row="0" Grid.Column="1" BackgroundColor="#fff1f2" BorderColor="#fecdd3" CornerRadius="12" Padding="15" HasShadow="False">
+                    <StackLayout>
+                        <Label Text="Total Expenses" FontSize="12" TextColor="#e11d48" FontAttributes="Bold"/>
+                        <Label x:Name="lblExpenses" Text="$0.00" FontSize="22" FontAttributes="Bold" TextColor="#be123c" Margin="0,5,0,0"/>
+                    </StackLayout>
+                </Frame>
+
+                <Frame Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" BackgroundColor="White" CornerRadius="12" Padding="20" HasShadow="True">
+                    <Grid ColumnDefinitions="*, Auto">
+                        <StackLayout>
+                            <Label Text="Net Profit" FontSize="14" TextColor="Gray"/>
+                            <Label x:Name="lblNetProfit" Text="$0.00" FontSize="28" FontAttributes="Bold" TextColor="#0f172a"/>
+                        </StackLayout>
+                        <Frame Grid.Column="1" x:Name="frmMargin" BackgroundColor="#eff6ff" CornerRadius="8" Padding="10,5" HasShadow="False" VerticalOptions="Center">
+                            <Label x:Name="lblMargin" Text="0% Margin" TextColor="#2563eb" FontSize="12" FontAttributes="Bold"/>
+                        </Frame>
+                    </Grid>
+                </Frame>
+            </Grid>
+
+            <Label Text="Expenses by Category" FontSize="18" FontAttributes="Bold" TextColor="#0f172a" Margin="0,10,0,0"/>
+
+            <Frame BackgroundColor="White" CornerRadius="12" Padding="15" HasShadow="True">
+                <VerticalStackLayout x:Name="slCategoryBreakdown" Spacing="15">
+                </VerticalStackLayout>
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

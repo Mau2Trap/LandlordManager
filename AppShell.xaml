@@ -6,13 +6,18 @@
     xmlns:local="clr-namespace:LandlordManager"
     Shell.FlyoutBehavior="Flyout"
     FlyoutBackgroundColor="#0f172a">
+
     <Shell.FlyoutHeader>
-        <Grid HeightRequest="100" BackgroundColor="#0f172a" Padding="20">
-            <Label Text="RENTALYST" 
-                   TextColor="White" 
-                   FontSize="24" 
-                   FontAttributes="Bold" 
-                   VerticalOptions="Center"/>
+        <Grid HeightRequest="120" BackgroundColor="#0f172a" Padding="20">
+            <VerticalStackLayout VerticalOptions="Center">
+                <Label Text="RENTALYST" 
+                       TextColor="White" 
+                       FontSize="24" 
+                       FontAttributes="Bold"/>
+                <Label Text="Property Manager" 
+                       TextColor="#94a3b8" 
+                       FontSize="14"/>
+            </VerticalStackLayout>
         </Grid>
     </Shell.FlyoutHeader>
 
@@ -36,9 +41,10 @@
         <ShellContent ContentTemplate="{DataTemplate local:RepairsPage}" />
     </FlyoutItem>
 
-    <MenuItem Text="Financials" />
-    <MenuItem Text="Messages" />
-    <MenuItem Text="Documents" />
-    <MenuItem Text="Repairs" />
+    <FlyoutItem Title="Financials" Icon="dollar_icon.png">
+        <ShellContent ContentTemplate="{DataTemplate local:FinancialsPage}" />
+    </FlyoutItem>
+
+    <MenuItem Text="Sign Out" IconImageSource="logout_icon.png"/>
 
 </Shell>

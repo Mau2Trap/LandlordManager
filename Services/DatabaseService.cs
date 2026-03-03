@@ -15,7 +15,7 @@ namespace LandlordManager.Services
             var dbPath = Path.Combine(FileSystem.AppDataDirectory, "RentalystData.db");
             _database = new SQLiteAsyncConnection(dbPath);
 
-            // Create ALL tables for the complete app
+            // Create ALL tables (Ensure you created the Document and RepairRequest files above first!)
             await _database.CreateTableAsync<Property>();
             await _database.CreateTableAsync<Tenant>();
             await _database.CreateTableAsync<Transaction>();
@@ -28,14 +28,26 @@ namespace LandlordManager.Services
         public async Task<(int PropCount, int TenantCount, decimal NetIncome)> GetDashboardStatsAsync()
         {
             await Init();
-            var props = await _database.Table<Property>().CountAsync();
-            var tenants = await _database.Table<Tenant>().Where(t => t.IsActive).CountAsync();
+            // Use simple checks to avoid crashing if tables are empty
+            int props = 0;
+            int tenants = 0;
+            decimal netIncome = 0;
 
-            var transactions = await _database.Table<Transaction>().ToListAsync();
-            decimal income = transactions.Where(t => t.Type == "Income").Sum(t => t.Amount);
-            decimal expenses = transactions.Where(t => t.Type == "Expense").Sum(t => t.Amount);
+            try
+            {
+                props = await _database.Table<Property>().CountAsync();
+                tenants = await _database.Table<Tenant>().Where(t => t.IsActive).CountAsync();
+                var transactions = await _database.Table<Transaction>().ToListAsync();
+                var income = transactions.Where(t => t.Type == "Income").Sum(t => t.Amount);
+                var expenses = transactions.Where(t => t.Type == "Expense").Sum(t => t.Amount);
+                netIncome = income - expenses;
+            }
+            catch
+            {
+                // Table might not exist yet, ignore
+            }
 
-            return (props, tenants, income - expenses);
+            return (props, tenants, netIncome);
         }
 
         // --- PROPERTIES ---
@@ -94,7 +106,6 @@ namespace LandlordManager.Services
         public async Task<List<Document>> GetDocumentsAsync()
         {
             await Init();
-            // Check if table exists (in case user runs old version first)
             return await _database.Table<Document>().OrderByDescending(d => d.UploadDate).ToListAsync();
         }
 
@@ -103,11 +114,11 @@ namespace LandlordManager.Services
             await Init();
             return await _database.InsertAsync(doc);
         }
+
         // --- REPAIRS ---
         public async Task<List<RepairRequest>> GetRepairsAsync()
         {
             await Init();
-            // Sort: High priority first, then by date
             return await _database.Table<RepairRequest>()
                                   .OrderByDescending(r => r.Priority)
                                   .ThenByDescending(r => r.ReportedDate)

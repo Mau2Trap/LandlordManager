@@ -6,10 +6,23 @@ namespace LandlordManager.Models
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
+        public string Name { get; set; }
         public string Address { get; set; }
+
+        // --- Restored Fields ---
         public string City { get; set; }
-        public string Province { get; set; } // Supports Canadian focus (ON, BC, etc.) [cite: 298]
+        public string Province { get; set; }
+        // -----------------------
+
+        public string Type { get; set; }
+        public int Units { get; set; }
         public decimal MonthlyRent { get; set; }
-        public string ImagePath { get; set; } // For storing property photos
+
+        // New Financial Fields from Base44 Blueprint
+        public decimal PurchasePrice { get; set; }
+        public decimal CurrentValue { get; set; }
+
+        public string Status { get; set; }
+        public string ImagePath { get; set; }
     }
 }
